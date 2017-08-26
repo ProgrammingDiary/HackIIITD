@@ -11,9 +11,12 @@ def index(request):
 
 def dashboard(request, user_id):
     # tenders = get_object_or_404( , pk = user_id)
-    tenders = Tender.objects.values('name').filter(pk = User.objects.value_list('tender_categories'))
+    #tenders = Tender.objects.values('name').filter(pk = User.objects.value_list('tender_categories'))
     # tenders = "\n".join([t.name for t in User.tender_categories.all()])
-    print tenders
+    tenders = User.objects.filter(pk=user_id)
+    for tender in tenders :
+        print tender.tender_categories.all()
+    #print tenders
     context = {'user_id': user_id, 'tenders': tenders}
     return render(request, 'app/dashboard.html', context)
 
